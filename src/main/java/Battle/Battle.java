@@ -5,25 +5,23 @@ import java.util.Scanner;
 import static Ship.PlayerShip.placeShipsPlayer;
 
 public class Battle {
-    static Scanner scanner = new Scanner(System.in);
 
-    static int[][] FieldComputer = new int[10][10];
-    static int[][] FieldPlayer = new int[10][10];
-    static String playerName = scanner.nextLine();
-    static String computerName = scanner.nextLine();
-
+    static Scanner in = new Scanner(System.in);
+    static int[][] fieldComputer = new int[10][10];
+    static int[][] fieldPlayer = new int[10][10];
 
     public static void playGame() {
 
+        System.out.println("Имя игрока?");
+        String playerName = in.nextLine();
+        System.out.println("Имя игрока: " + playerName);
+        System.out.println("Карта игрока:");
+        placeShipsPlayer(playerName, fieldPlayer);
 
-        System.out.println("Player name:");
-        System.out.println("Player Field");
-        placeShipsPlayer(playerName, FieldPlayer);
-
-
-
-        System.out.println("Computer name:");
-        System.out.println("Computer Field");
-        placeShipsPlayer(computerName, FieldComputer);
+//        System.out.println("Имя компьютера?");
+//        String computerName = in.nextLine();
+//        System.out.println("Имя компьютера: " + computerName);
+//        System.out.println("Карта компьютера:");
+//        placeShipsComputer(computerName, fieldComputer);
     }
 }

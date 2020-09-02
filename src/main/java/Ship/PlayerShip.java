@@ -2,7 +2,8 @@ package Ship;
 
 import java.util.Scanner;
 
-import static Field.Field.Field;
+import static Field.Field.field;
+
 
 public class PlayerShip {
 
@@ -10,45 +11,73 @@ public class PlayerShip {
     static int twoDeck = 3;
     static int threeDeck = 2;
     static int fourDeck = 1;
-    static int numberShips = 10;
     static Scanner in = new Scanner(System.in);
 
     public static void placeShipsPlayer(String playerName, int[][] battlefield) {
-        while (numberShips >= 1) {
-            Field(battlefield);
+        field(battlefield);
 
-            System.out.println("Please enter OX coordinate:");
-            int x = in.nextInt();
-            System.out.println("Please enter OY coordinate:");
-            int y = in.nextInt();
+        setShip(battlefield, oneDeck, playerName);
+        field(battlefield);
 
-            System.out.println("Choose direction:");
-            System.out.println("1. Vertical.");
-            System.out.println("2. Horizontal.");
+        setShip(battlefield, twoDeck, playerName);
+        field(battlefield);
+
+        setShip(battlefield, threeDeck, playerName);
+        field(battlefield);
+
+        setShip(battlefield, fourDeck, playerName);
+        field(battlefield);
+    }
+
+
+    private static void setShip(int[][] battlefield, int deck, String playerName) {
+        int ship = 0;
+
+        if (deck == 1) {
+            ship = 4;
+        } else if (deck == 2) {
+            ship = 3;
+        } else if (deck == 3) {
+            ship = 2;
+        } else if (deck == 4) {
+            ship = 1;
+        }
+
+        System.out.println(playerName + ", установите " + ship + " палубный корабль");
+
+        int i = 1;
+        int x, y;
+        while (i <= deck) {
+            System.out.print("Введите X координату для вашего " + i + ". корабля: ");
+            x = in.nextInt();
+            while (x < 0 || x > 9) {
+                System.out.println("Невалидное значение!");
+                System.out.print("Введите X координату для вашего " + i + ". корабля: ");
+                x = in.nextInt();
+            }
+
+            System.out.print("Введите Y координату для вашего " + i + ". корабля: ");
+            y = in.nextInt();
+            while (y < 0 || y > 9) {
+                System.out.println("Невалидное значение!");
+                System.out.print("Введите Y координату для вашего " + i + ". корабля: ");
+                y = in.nextInt();
+            }
+
+            System.out.println("Выберите направление оси корабля:");
+            System.out.println("1. Вертикально.");
+            System.out.println("2. Горизонтально.");
             int direction = in.nextInt();
 
-            for (int i = 0; i < oneDeck; i++) {
+            for (int a = 0; a < ship; a++) {
                 if (direction == 1) {
-                    battlefield[x][y + i] = 1;
-                } else {}
-            }
-
-            for (int i = 0; i < twoDeck; i++) {
-                if (battlefield[x][y]) {
+                    battlefield[x + a][y] = 1;
+                } else {
+                    battlefield[y][x + a] = 1;
                 }
             }
 
-            for (int i = 0; i < threeDeck; i++) {
-                if (battlefield[x][y]) {
-                }
-            }
-
-            for (int i = 0; i < fourDeck; i++) {
-                if (battlefield[x][y]) {
-                }
-            }
-
-            numberShips--;
+            ++i;
         }
     }
 }
