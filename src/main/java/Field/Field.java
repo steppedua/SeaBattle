@@ -10,7 +10,7 @@ public class Field {
                 if (field[i][j] == 0) {
                     System.out.print("- ");
                 } else {
-                    System.out.print("X ");
+                    System.out.print("@ ");
                 }
             }
             System.out.println();
