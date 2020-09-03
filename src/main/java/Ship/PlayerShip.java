@@ -67,10 +67,15 @@ public class PlayerShip {
             System.out.println("Выберите направление оси корабля:");
             System.out.println("1. Вертикально.");
             System.out.println("2. Горизонтально.");
-            int direction = in.nextInt();
+            int rotation = in.nextInt();
+
+            if (!isLocation(x, y, deck, rotation, battlefield)) {
+                System.out.println("Невалидное расположение корабля номер" + i + ", установите новые координаты!");
+                continue;
+            }
 
             for (int a = 0; a < ship; a++) {
-                if (direction == 1) {
+                if (rotation == 1) {
                     battlefield[x + a][y] = 1;
                 } else {
                     battlefield[y][x + a] = 1;
@@ -79,5 +84,56 @@ public class PlayerShip {
 
             ++i;
         }
+    }
+
+    private static boolean isLocation(int x, int y, int deck, int rotation, int[][] battleMap) {
+
+        if (rotation == 1) {
+            if (y + deck > battleMap.length) {
+                return false;
+            }
+        }
+
+        if (rotation == 2) {
+            if (x + deck > battleMap[0].length) {
+                return false;
+            }
+        }
+        while (deck != 0) {
+            for (int i = 0; i < deck; i++) {
+                int xi = 0;
+                int yi = 0;
+
+                if (rotation == 1) {
+                    yi = i;
+                } else {
+                    xi = i;
+                }
+
+                if (x + 1 + xi < battleMap.length && x + 1 + xi >= 0) {
+                    if (battleMap[x + 1 + xi][y + yi] != 0) {
+                        return false;
+                    }
+                }
+
+                if (x - 1 + xi < battleMap.length && x - 1 + xi >= 0) {
+                    if (battleMap[x - 1 + xi][y + yi] != 0) {
+                        return false;
+                    }
+                }
+                if (y + 1 + yi < battleMap.length && y + 1 + yi >= 0) {
+                    if (battleMap[x + xi][y + 1 + yi] != 0) {
+                        return false;
+                    }
+                }
+                if (y - 1 + yi < battleMap.length && y - 1 + yi >= 0) {
+                    if (battleMap[x + xi][y - 1 + yi] != 0) {
+                        return false;
+                    }
+                }
+            }
+            deck--;
+        }
+        return true;
     }
 }
