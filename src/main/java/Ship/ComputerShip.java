@@ -12,24 +12,24 @@ public class ComputerShip {
 
     private static final Random random = new Random();
 
-    public static void placeShipsComputer(String playerName, int[][] battlefield) {
-        field(battlefield);
+    public static void placeShipsComputer(String playerName, int[][] field) {
+        field(field);
 
-        setShip(battlefield, oneDeck, playerName);
-        field(battlefield);
+        setShip(field, oneDeck, playerName);
+        field(field);
 
-        setShip(battlefield, twoDeck, playerName);
-        field(battlefield);
+        setShip(field, twoDeck, playerName);
+        field(field);
 
-        setShip(battlefield, threeDeck, playerName);
-        field(battlefield);
+        setShip(field, threeDeck, playerName);
+        field(field);
 
-        setShip(battlefield, fourDeck, playerName);
-        field(battlefield);
+        setShip(field, fourDeck, playerName);
+        field(field);
     }
 
 
-    private static void setShip(int[][] battlefield, int deck, String playerName) {
+    private static void setShip(int[][] field, int deck, String playerName) {
         int ship = 0;
 
         if (deck == 1) {
@@ -51,7 +51,7 @@ public class ComputerShip {
 
             y = random.nextInt(10);
 
-            int rotation = random.nextInt(2);
+            int rotation = random.nextInt(2) + 1;
 
             if (!location(x, y, ship, rotation)) {
                 continue;
@@ -59,9 +59,9 @@ public class ComputerShip {
 
             for (int a = 0; a < ship; a++) {
                 if (rotation == 1) {
-                    battlefield[x + a][y] = 1;
+                    field[x + a][y] = 1;
                 } else {
-                    battlefield[x][y + a] = 1;
+                    field[x][y + a] = 1;
                 }
             }
 

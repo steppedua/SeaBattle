@@ -14,24 +14,24 @@ public class PlayerShip {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void placeShipsPlayer(String playerName, int[][] battlefield) {
-        field(battlefield);
+    public static void placeShipsPlayer(String playerName, int[][] field) {
+        field(field);
 
-        setShip(battlefield, oneDeck, playerName);
-        field(battlefield);
+        setShip(field, oneDeck, playerName);
+        field(field);
 
-        setShip(battlefield, twoDeck, playerName);
-        field(battlefield);
+        setShip(field, twoDeck, playerName);
+        field(field);
 
-        setShip(battlefield, threeDeck, playerName);
-        field(battlefield);
+        setShip(field, threeDeck, playerName);
+        field(field);
 
-        setShip(battlefield, fourDeck, playerName);
-        field(battlefield);
+        setShip(field, fourDeck, playerName);
+        field(field);
     }
 
 
-    private static void setShip(int[][] battlefield, int deck, String playerName) {
+    private static void setShip(int[][] field, int deck, String playerName) {
         int ship = 0;
 
         if (deck == 1) {
@@ -83,9 +83,9 @@ public class PlayerShip {
 
             for (int a = 0; a < ship; a++) {
                 if (rotation == 1) {
-                    battlefield[x + a][y] = 1;
+                    field[x + a][y] = 1;
                 } else {
-                    battlefield[x][y + a] = 1;
+                    field[x][y + a] = 1;
                 }
             }
 

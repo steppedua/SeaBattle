@@ -18,7 +18,7 @@ public class BattleMapComputer {
                         System.out.print("- ");
                     } else if (battleMap[i][j] == 1) {
                         System.out.print("O ");
-                    } else {
+                    } else if (battleMap[i][j] == 2) {
                         System.out.print("X ");
                     }
 
@@ -27,9 +27,9 @@ public class BattleMapComputer {
             }
 
 
-            int x = random.nextInt(9);
+            int x = random.nextInt(10);
 
-            int y = random.nextInt(9);
+            int y = random.nextInt(10);
 
             if (battleField[y][x] == 1) {
                 battleMap[y][x] = 2;

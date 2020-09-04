@@ -19,7 +19,7 @@ public class BattleMapPlayer {
                         System.out.print("- ");
                     } else if (battleMap[i][j] == 1) {
                         System.out.print("O ");
-                    } else {
+                    } else if (battleMap[i][j] == 2) {
                         System.out.print("X ");
                     }
 
