@@ -2,7 +2,9 @@ package Battle;
 
 import java.util.Scanner;
 
-import static Battle.BattleMap.battleMap;
+import static Battle.BattleMapComputer.battleMapComputer;
+import static Battle.BattleMapPlayer.battleMapPlayer;
+import static Ship.ComputerShip.placeShipsComputer;
 import static Ship.PlayerShip.placeShipsPlayer;
 
 public class Battle {
@@ -24,22 +26,21 @@ public class Battle {
         System.out.println("Карта игрока:");
         placeShipsPlayer(playerName, fieldPlayer);
 
-        System.out.println("Имя компьютера?");
-        String computerName = in.nextLine();
+        String computerName = "Cyborg";
         System.out.println("Имя компьютера: " + computerName);
         System.out.println("Карта компьютера:");
-        placeShipsPlayer(computerName, fieldComputer);
+        placeShipsComputer(computerName, fieldComputer);
 
         System.out.println("Начало сражения");
 
         while (true) {
 
-            battleMap(playerName, battleMapPlayer, fieldComputer);
+            battleMapPlayer(playerName, battleMapPlayer, fieldComputer);
             if (isWin(playerName, computerName)) {
                 break;
             }
 
-            battleMap(computerName, battleMapComputer, fieldPlayer);
+            battleMapComputer(computerName, battleMapComputer, fieldPlayer);
             if (isWin(playerName, computerName)) {
                 break;
             }

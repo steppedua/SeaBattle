@@ -3,11 +3,11 @@ package Battle;
 
 import java.util.Scanner;
 
-public class BattleMap {
+public class BattleMapPlayer {
 
-    static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
-    public static void battleMap(String playerName, int[][] battleMap, int[][] battleField) {
+    public static void battleMapPlayer(String playerName, int[][] battleMap, int[][] battleField) {
 
         while (true) {
             System.out.println(playerName + " , осуществите свой ход.");
@@ -47,7 +47,7 @@ public class BattleMap {
                 System.out.println("Попали! Продолжайте!");
                 battleMap[y][x] = 2;
             } else {
-                System.out.println("Промахнулись! Ход переходит к сопернику");
+                System.out.println("Промахнулись! Ход переходит к компьютеру");
                 battleMap[y][x] = 1;
                 break;
             }
