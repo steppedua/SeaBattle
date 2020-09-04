@@ -76,7 +76,7 @@ public class PlayerShip {
                 rotation = in.nextInt();
             }
 
-            if (!location(x, y, ship, rotation)) {
+            if (!location(x, y, ship, rotation, field)) {
                 System.out.println("Невалидное расположение корабля " + i + ", установите новые координаты!");
                 continue;
             }
@@ -93,18 +93,16 @@ public class PlayerShip {
         }
     }
 
-    private static boolean location(int x, int y, int deck, int rotation) {
+    private static boolean location(int x, int y, int deck, int rotation, int[][] field) {
 
-        if (rotation == 1) {
-            if (x + deck > 10) {
-                return false;
-            }
+        if (rotation == 1 && x + deck > 10) {
+            return false;
+        } else if (rotation == 2 && y + deck > 10) {
+            return false;
         }
 
-        if (rotation == 2) {
-            if (y + deck > 10) {
-                return false;
-            }
+        if (field[x][y] == 1) {
+            return false;
         }
 
         return true;

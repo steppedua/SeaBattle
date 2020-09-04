@@ -31,11 +31,11 @@ public class BattleMapComputer {
 
             int y = random.nextInt(10);
 
-            if (battleField[y][x] == 1) {
-                battleMap[y][x] = 2;
+            if (battleField[x][y] == 1) {
+                battleMap[x][y] = 2;
             } else {
                 System.out.println("Компьютер промахнулся! Ход переходит к игроку");
-                battleMap[y][x] = 1;
+                battleMap[x][y] = 1;
                 break;
             }
         }

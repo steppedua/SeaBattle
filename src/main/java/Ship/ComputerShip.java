@@ -10,21 +10,19 @@ public class ComputerShip {
     static int threeDeck = 2;
     static int fourDeck = 1;
 
-    private static final Random random = new Random();
+    static Random random = new Random();
 
     public static void placeShipsComputer(String playerName, int[][] field) {
         field(field);
 
         setShip(field, oneDeck, playerName);
-        field(field);
 
         setShip(field, twoDeck, playerName);
-        field(field);
 
         setShip(field, threeDeck, playerName);
-        field(field);
 
         setShip(field, fourDeck, playerName);
+
         field(field);
     }
 
@@ -53,7 +51,7 @@ public class ComputerShip {
 
             int rotation = random.nextInt(2) + 1;
 
-            if (!location(x, y, ship, rotation)) {
+            if (!location(x, y, ship, rotation, field)) {
                 continue;
             }
 
@@ -69,18 +67,16 @@ public class ComputerShip {
         }
     }
 
-    private static boolean location(int x, int y, int deck, int rotation) {
+    private static boolean location(int x, int y, int deck, int rotation, int[][] field) {
 
-        if (rotation == 1) {
-            if (x + deck > 10) {
+        if (rotation == 1 && x + deck > 10) {
                 return false;
-            }
+        } else if (rotation == 2 && y + deck > 10) {
+                return false;
         }
 
-        if (rotation == 2) {
-            if (y + deck > 10) {
-                return false;
-            }
+        if (field[x][y] == 1) {
+            return false;
         }
 
         return true;

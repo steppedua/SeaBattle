@@ -43,12 +43,12 @@ public class BattleMapPlayer {
                 y = in.nextInt();
             }
 
-            if (battleField[y][x] == 1) {
+            if (battleField[x][y] == 1) {
                 System.out.println("Попали! Продолжайте!");
-                battleMap[y][x] = 2;
+                battleMap[x][y] = 2;
             } else {
                 System.out.println("Промахнулись! Ход переходит к компьютеру");
-                battleMap[y][x] = 1;
+                battleMap[x][y] = 1;
                 break;
             }
         }
