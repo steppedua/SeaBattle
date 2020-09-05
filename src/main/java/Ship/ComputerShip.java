@@ -5,23 +5,15 @@ import java.util.Random;
 import static Field.Field.field;
 
 public class ComputerShip {
-    static int oneDeck = 4;
-    static int twoDeck = 3;
-    static int threeDeck = 2;
-    static int fourDeck = 1;
 
     static Random random = new Random();
 
     public static void placeShipsComputer(String playerName, int[][] field) {
         field(field);
 
-        setShip(field, oneDeck, playerName);
-
-        setShip(field, twoDeck, playerName);
-
-        setShip(field, threeDeck, playerName);
-
-        setShip(field, fourDeck, playerName);
+        for (int i = 4; i >= 1; i--) {
+            setShip(field, i, playerName);
+        }
 
         field(field);
     }
@@ -70,9 +62,9 @@ public class ComputerShip {
     private static boolean location(int x, int y, int deck, int rotation, int[][] field) {
 
         if (rotation == 1 && x + deck > 10) {
-                return false;
+            return false;
         } else if (rotation == 2 && y + deck > 10) {
-                return false;
+            return false;
         }
 
         if (field[x][y] == 1) {

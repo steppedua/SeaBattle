@@ -7,29 +7,17 @@ import static Field.Field.field;
 
 public class PlayerShip {
 
-    static int oneDeck = 4;
-    static int twoDeck = 3;
-    static int threeDeck = 2;
-    static int fourDeck = 1;
-
     static Scanner in = new Scanner(System.in);
 
     public static void placeShipsPlayer(String playerName, int[][] field) {
         field(field);
 
-        setShip(field, oneDeck, playerName);
-        field(field);
+        for (int i = 4; i >= 1; i--) {
+            setShip(field, i, playerName);
+            field(field);
+        }
 
-        setShip(field, twoDeck, playerName);
-        field(field);
-
-        setShip(field, threeDeck, playerName);
-        field(field);
-
-        setShip(field, fourDeck, playerName);
-        field(field);
     }
-
 
     private static void setShip(int[][] field, int deck, String playerName) {
         int ship = 0;
