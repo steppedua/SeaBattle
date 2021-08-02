@@ -1,36 +1,26 @@
 package Ship;
 
+import Field.Field;
+
 import java.util.Scanner;
 
-import static Field.Field.field;
 
-
-public class PlayerShip {
+public class PlayerShip implements Location, Ship {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void placeShipsPlayer(String playerName, int[][] field) {
-        field(field);
+    public void placeShipsPlayer(String playerName, int[][] fieldShip) {
+        Field field = new Field();
 
         for (int i = 4; i >= 1; i--) {
-            setShip(field, i, playerName);
-            field(field);
+            setShip(fieldShip, i, playerName);
+            field.field(fieldShip);
         }
 
     }
 
-    private static void setShip(int[][] field, int deck, String playerName) {
-        int ship = 0;
-
-        if (deck == 1) {
-            ship = 4;
-        } else if (deck == 2) {
-            ship = 3;
-        } else if (deck == 3) {
-            ship = 2;
-        } else if (deck == 4) {
-            ship = 1;
-        }
+    private void setShip(int[][] field, int deck, String playerName) {
+        int ship = getShipNumber(deck);
 
         System.out.println(playerName + ", установите " + ship + " палубный корабль");
 
@@ -64,7 +54,7 @@ public class PlayerShip {
                 rotation = in.nextInt();
             }
 
-            if (!location(x, y, ship, rotation, field)) {
+            if (!locationShip(x, y, ship, rotation, field)) {
                 System.out.println("Невалидное расположение корабля " + i + ", установите новые координаты!");
                 continue;
             }
@@ -79,20 +69,5 @@ public class PlayerShip {
 
             ++i;
         }
-    }
-
-    private static boolean location(int x, int y, int deck, int rotation, int[][] field) {
-
-        if (rotation == 1 && x + deck > 10) {
-            return false;
-        } else if (rotation == 2 && y + deck > 10) {
-            return false;
-        }
-
-        if (field[x][y] == 1) {
-            return false;
-        }
-
-        return true;
     }
 }

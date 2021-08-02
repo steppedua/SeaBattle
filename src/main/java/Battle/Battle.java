@@ -1,11 +1,10 @@
 package Battle;
 
+import Ship.ComputerShip;
+import Ship.PlayerShip;
+
 import java.util.Scanner;
 
-import static Battle.BattleMapComputer.battleMapComputer;
-import static Battle.BattleMapPlayer.battleMapPlayer;
-import static Ship.ComputerShip.placeShipsComputer;
-import static Ship.PlayerShip.placeShipsPlayer;
 
 public class Battle {
 
@@ -24,24 +23,24 @@ public class Battle {
         String playerName = in.nextLine();
         System.out.println("Имя игрока: " + playerName);
         System.out.println("Карта игрока:");
-        placeShipsPlayer(playerName, fieldPlayer);
+        new PlayerShip().placeShipsPlayer(playerName, fieldPlayer);
 
         String computerName = "Cyborg";
         System.out.println("Имя компьютера: " + computerName);
         System.out.println("Карта компьютера:");
-        placeShipsComputer(computerName, fieldComputer);
+        new ComputerShip().placeShipsComputer(computerName, fieldComputer);
 
         System.out.println("Начало сражения");
 
         while (true) {
 
-            battleMapPlayer(playerName, battleMapPlayer, fieldComputer);
-            if (isWin(playerName, computerName)) {
+            new BattleMapPlayer().battleMapPlayer(playerName, battleMapPlayer, fieldComputer);
+            if (new Battle().isWin(playerName, computerName)) {
                 break;
             }
 
-            battleMapComputer(computerName, battleMapComputer, fieldPlayer);
-            if (isWin(playerName, computerName)) {
+            new BattleMapComputer().battleMapComputer(computerName, battleMapComputer, fieldPlayer);
+            if (new Battle().isWin(playerName, computerName)) {
                 break;
             }
         }
@@ -49,24 +48,10 @@ public class Battle {
         System.out.println("Конец сражения");
     }
 
-    private static boolean isWin(String playerName, String computerName) {
-        int countPlayer = 0;
-        for (int i = 0; i < battleMapPlayer.length; i++) {
-            for (int j = 0; j < battleMapPlayer[1].length; j++) {
-                if (battleMapPlayer[i][j] == 2) {
-                    countPlayer++;
-                }
-            }
-        }
+    private boolean isWin(String playerName, String computerName) {
+        int countPlayer = getCount(battleMapPlayer);
 
-        int countComputer = 0;
-        for (int i = 0; i < battleMapComputer.length; i++) {
-            for (int j = 0; j < battleMapComputer[1].length; j++) {
-                if (battleMapComputer[i][j] == 2) {
-                    countComputer++;
-                }
-            }
-        }
+        int countComputer = getCount(battleMapComputer);
 
         if (countPlayer >= 20) {
             System.out.println(playerName + ", победил!");
@@ -78,5 +63,17 @@ public class Battle {
             return true;
         }
         return false;
+    }
+
+    private int getCount(int[][] battleMapPlayer) {
+        int countPlayer = 0;
+        for (int i = 0; i < battleMapPlayer.length; i++) {
+            for (int j = 0; j < battleMapPlayer[1].length; j++) {
+                if (battleMapPlayer[i][j] == 2) {
+                    countPlayer++;
+                }
+            }
+        }
+        return countPlayer;
     }
 }

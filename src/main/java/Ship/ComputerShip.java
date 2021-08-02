@@ -1,36 +1,27 @@
 package Ship;
 
+import Field.Field;
+
 import java.util.Random;
 
-import static Field.Field.field;
-
-public class ComputerShip {
+public class ComputerShip implements Location, Ship {
 
     static Random random = new Random();
 
-    public static void placeShipsComputer(String playerName, int[][] field) {
-        field(field);
+    public void placeShipsComputer(String playerName, int[][] fieldShip) {
+        Field field = new Field();
+        field.field(fieldShip);
 
         for (int i = 4; i >= 1; i--) {
-            setShip(field, i, playerName);
+            setShip(fieldShip, i, playerName);
         }
 
-        field(field);
+        field.field(fieldShip);
     }
 
 
-    private static void setShip(int[][] field, int deck, String playerName) {
-        int ship = 0;
-
-        if (deck == 1) {
-            ship = 4;
-        } else if (deck == 2) {
-            ship = 3;
-        } else if (deck == 3) {
-            ship = 2;
-        } else if (deck == 4) {
-            ship = 1;
-        }
+    private void setShip(int[][] field, int deck, String playerName) {
+        int ship = getShipNumber(deck);
 
         System.out.println(playerName + ", установите " + ship + " палубный корабль");
 
@@ -43,7 +34,7 @@ public class ComputerShip {
 
             int rotation = random.nextInt(2) + 1;
 
-            if (!location(x, y, ship, rotation, field)) {
+            if (!locationShip(x, y, ship, rotation, field)) {
                 continue;
             }
 
@@ -57,20 +48,5 @@ public class ComputerShip {
 
             ++i;
         }
-    }
-
-    private static boolean location(int x, int y, int deck, int rotation, int[][] field) {
-
-        if (rotation == 1 && x + deck > 10) {
-            return false;
-        } else if (rotation == 2 && y + deck > 10) {
-            return false;
-        }
-
-        if (field[x][y] == 1) {
-            return false;
-        }
-
-        return true;
     }
 }
